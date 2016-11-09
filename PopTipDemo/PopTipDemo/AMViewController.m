@@ -83,7 +83,7 @@
         label.font = [UIFont systemFontOfSize:12];
         [customView addSubview:label];
         self.popTip.popoverColor = [UIColor colorWithRed:0.95 green:0.65 blue:0.21 alpha:1];
-        [self.popTip showCustomView:customView direction:AMPopTipDirectionDown inView:self.view fromFrame:sender.frame];
+        [self.popTip showCustomView:customView direction:AMPopTipDirectionDown anchorView:sender];
     }
     if (sender == self.buttonTopRight) {
         self.popTip.popoverColor = [UIColor colorWithRed:0.97 green:0.9 blue:0.23 alpha:1];
@@ -97,7 +97,7 @@
             self.popTip.bubbleOffset = 25;
             AMPopTipDirectionTopRight = AMPopTipDirectionLeft;
         }
-        [self.popTip showText:@"I'm a popover popping over. I have a offset to move the bubble down or left side." direction:AMPopTipDirectionTopRight maxWidth:150 inView:self.view fromFrame:sender.frame];
+        [self.popTip showText:@"I'm a popover popping over. I have a offset to move the bubble down or left side." direction:AMPopTipDirectionTopRight maxWidth:150 anchorView:sender];
     }
     if (sender == self.buttonBottomLeft) {
         self.popTip.popoverColor = [UIColor colorWithRed:0.73 green:0.91 blue:0.55 alpha:1];
@@ -111,7 +111,7 @@
             self.popTip.bubbleOffset = -25;
             AMPopTipDirectionBottomLeft = AMPopTipDirectionRight;
         }
-        [self.popTip showText:@"I'm a popover popping over. I have a offset to move the bubble up or right side." direction:AMPopTipDirectionBottomLeft maxWidth:150 inView:self.view fromFrame:sender.frame];
+        [self.popTip showText:@"I'm a popover popping over. I have a offset to move the bubble up or right side." direction:AMPopTipDirectionBottomLeft maxWidth:150 anchorView:sender];
     }
     if (sender == self.buttonBottomRight) {
         self.popTip.popoverColor = [UIColor colorWithRed:0.81 green:0.04 blue:0.14 alpha:1];
@@ -121,15 +121,14 @@
                                                                                                                            NSForegroundColorAttributeName: [UIColor whiteColor],
                                                                                                                            NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)
                                                                                                                            }]];
-        [self.popTip showAttributedText:attributedText direction:AMPopTipDirectionUp maxWidth:200 inView:self.view fromFrame:sender.frame];
+        [self.popTip showAttributedText:attributedText direction:AMPopTipDirectionUp maxWidth:200 anchorView:sender];
     }
     if (sender == self.buttonCenter) {
         self.popTip.popoverColor = [UIColor colorWithRed:0.31 green:0.57 blue:0.87 alpha:1];
         static int direction = 0;
         
-        [self.popTip showText:@"Animated popover, great for subtle UI tips and onboarding" direction:direction maxWidth:200 inView:self.view fromFrame:sender.frame duration:0];
+        [self.popTip showText:@"Animated popover, great for subtle UI tips and onboarding" direction:direction maxWidth:200 anchorView:sender duration:0];
         direction = (direction + 1) % 4;
     }
 }
-
 @end
