@@ -131,15 +131,4 @@
         direction = (direction + 1) % 4;
     }
 }
-
-- (CGRect) getAbsoluteFrame:(UIView*)view {
-    CGRect frame = view.frame;
-    
-    if(view.superview != nil) {
-        CGRect superviewsFrame = [self getAbsoluteFrame:view.superview];
-        frame.origin.x += superviewsFrame.origin.x;
-        frame.origin.y += superviewsFrame.origin.y;
-    }
-    return frame;
-}
 @end
