@@ -349,41 +349,41 @@
     }];
 }
 
-- (void)showText:(NSString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth inView:(UIView *)view fromFrame:(CGRect)frame {
+- (void)showText:(NSString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth anchorView:(nonnull UIView *)view {
     self.attributedText = nil;
     self.text = text;
     self.accessibilityLabel = text;
     self.direction = direction;
-    self.containerView = view;
+    self.containerView = [self getSuperMostView:view];
     self.maxWidth = maxWidth;
-    _fromFrame = frame;
+    _fromFrame = [self getFrameRelativeToSuperMostView:view];
     [self.customView removeFromSuperview];
     self.customView = nil;
 
     [self show];
 }
 
-- (void)showAttributedText:(NSAttributedString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth inView:(UIView *)view fromFrame:(CGRect)frame {
+- (void)showAttributedText:(NSAttributedString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth anchorView:(nonnull UIView *)view {
     self.text = nil;
     self.attributedText = text;
     self.accessibilityLabel = [text string];
     self.direction = direction;
-    self.containerView = view;
+    self.containerView = [self getSuperMostView:view];
     self.maxWidth = maxWidth;
-    _fromFrame = frame;
+    _fromFrame = [self getFrameRelativeToSuperMostView:view];
     [self.customView removeFromSuperview];
     self.customView = nil;
 
     [self show];
 }
 
-- (void)showCustomView:(UIView *)customView direction:(AMPopTipDirection)direction inView:(UIView *)view fromFrame:(CGRect)frame {
+- (void)showCustomView:(UIView *)customView direction:(AMPopTipDirection)direction anchorView:(nonnull UIView *)view {
     self.text = nil;
     self.attributedText = nil;
     self.direction = direction;
-    self.containerView = view;
+    self.containerView = [self getSuperMostView:view];
     self.maxWidth = customView.frame.size.width;
-    _fromFrame = frame;
+    _fromFrame = [self getFrameRelativeToSuperMostView:view];
     [self.customView removeFromSuperview];
     self.customView = customView;
     [self addSubview:self.customView];
@@ -397,8 +397,8 @@
     [self setup];
 }
 
-- (void)showText:(NSString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth inView:(UIView *)view fromFrame:(CGRect)frame duration:(NSTimeInterval)interval {
-    [self showText:text direction:direction maxWidth:maxWidth inView:view fromFrame:frame];
+- (void)showText:(NSString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth anchorView:(nonnull UIView *)view duration:(NSTimeInterval)interval {
+    [self showText:text direction:direction maxWidth:maxWidth anchorView:view];
     [self.dismissTimer invalidate];
     if (interval > 0) {
         self.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:interval
@@ -409,8 +409,8 @@
     }
 }
 
-- (void)showAttributedText:(NSAttributedString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth inView:(UIView *)view fromFrame:(CGRect)frame duration:(NSTimeInterval)interval {
-    [self showAttributedText:text direction:direction maxWidth:maxWidth inView:view fromFrame:frame];
+- (void)showAttributedText:(NSAttributedString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth anchorView:(nonnull UIView *)view duration:(NSTimeInterval)interval {
+    [self showAttributedText:text direction:direction maxWidth:maxWidth anchorView:view];
     [self.dismissTimer invalidate];
     if (interval > 0){
         self.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:interval
@@ -421,8 +421,8 @@
     }
 }
 
-- (void)showCustomView:(UIView *)customView direction:(AMPopTipDirection)direction inView:(UIView *)view fromFrame:(CGRect)frame duration:(NSTimeInterval)interval {
-    [self showCustomView:customView direction:direction inView:view fromFrame:frame];
+- (void)showCustomView:(UIView *)customView direction:(AMPopTipDirection)direction anchorView:(nonnull UIView *)view duration:(NSTimeInterval)interval {
+    [self showCustomView:customView direction:direction anchorView:view];
     [self.dismissTimer invalidate];
     if (interval > 0){
         self.dismissTimer = [NSTimer scheduledTimerWithTimeInterval:interval
@@ -500,6 +500,25 @@
 - (void)setSwipeRemoveGestureDirection:(UISwipeGestureRecognizerDirection)swipeRemoveGestureDirection {
     _swipeRemoveGestureDirection = swipeRemoveGestureDirection;
     _swipeRemoveGesture.direction = swipeRemoveGestureDirection;
+}
+
+- (CGRect) getFrameRelativeToSuperMostView:(UIView *)view {
+    CGRect frame = view.frame;
+    
+    if(view.superview != nil) {
+        CGRect superviewsFrame = [self getFrameRelativeToSuperMostView:view.superview];
+        frame.origin.x += superviewsFrame.origin.x;
+        frame.origin.y += superviewsFrame.origin.y;
+    }
+    return frame;
+}
+
+- (UIView *) getSuperMostView:(UIView *)view {
+    
+    if(view.superview != nil) {
+        return [self getSuperMostView:view.superview];
+    }
+    return view;
 }
 
 - (void)dealloc {

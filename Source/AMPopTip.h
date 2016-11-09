@@ -101,10 +101,9 @@ typedef NS_ENUM(NSInteger, AMPopTipActionAnimation) {
  * @param text The text displayed.
  * @param direction The direction of the popover.
  * @param maxWidth The maximum width of the popover. If the popover won't fit in the given space, this will be overridden.
- * @param view The view that will hold the popover.
- * @param frame The originating frame. The popover's arrow will point to the center of this frame.
+ * @param anchorView The originating view. The popover's arrow will point to the center of this view.
  */
-- (void)showText:(nonnull NSString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth inView:(nonnull UIView *)view fromFrame:(CGRect)frame;
+- (void)showText:(nonnull NSString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth anchorView:(nonnull UIView *)view;
 
 /** Show the popover
  *
@@ -114,10 +113,9 @@ typedef NS_ENUM(NSInteger, AMPopTipActionAnimation) {
  * @param text The attributed text displayed.
  * @param direction The direction of the popover.
  * @param maxWidth The maximum width of the popover. If the popover won't fit in the given space, this will be overridden.
- * @param view The view that will hold the popover.
- * @param frame The originating frame. The popover's arrow will point to the center of this frame.
+ * @param anchorView The originating view. The popover's arrow will point to the center of this view.
  */
-- (void)showAttributedText:(nonnull NSAttributedString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth inView:(nonnull UIView *)view fromFrame:(CGRect)frame;
+- (void)showAttributedText:(nonnull NSAttributedString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth anchorView:(nonnull UIView *)view;
 
 /** Show the popover with a custom view
  *
@@ -126,10 +124,9 @@ typedef NS_ENUM(NSInteger, AMPopTipActionAnimation) {
  *
  * @param customView The custom view
  * @param direction The direction of the popover.
- * @param view The view that will hold the popover.
- * @param frame The originating frame. The popover's arrow will point to the center of this frame.
+ * @param anchorView The originating view. The popover's arrow will point to the center of this view.
  */
-- (void)showCustomView:(nonnull UIView *)customView direction:(AMPopTipDirection)direction inView:(nonnull UIView *)view fromFrame:(CGRect)frame;
+- (void)showCustomView:(nonnull UIView *)customView direction:(AMPopTipDirection)direction anchorView:(nonnull UIView *)view;
 
 /** Show the popover
  *
@@ -139,11 +136,10 @@ typedef NS_ENUM(NSInteger, AMPopTipActionAnimation) {
  * @param text The text displayed.
  * @param direction The direction of the popover.
  * @param maxWidth The maximum width of the popover. If the popover won't fit in the given space, this will be overridden.
- * @param view The view that will hold the popover.
- * @param frame The originating frame. The popover's arrow will point to the center of this frame.
+ * @param anchorView The originating view. The popover's arrow will point to the center of this view.
  * @param interval The time interval that determines when the poptip will self-dismiss
  */
-- (void)showText:(nonnull NSString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth inView:(nonnull UIView *)view fromFrame:(CGRect)frame duration:(NSTimeInterval)interval;
+- (void)showText:(nonnull NSString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth anchorView:(nonnull UIView *)view duration:(NSTimeInterval)interval;
 
 /** Show the popover
  *
@@ -153,11 +149,10 @@ typedef NS_ENUM(NSInteger, AMPopTipActionAnimation) {
  * @param text The attributed text displayed.
  * @param direction The direction of the popover.
  * @param maxWidth The maximum width of the popover. If the popover won't fit in the given space, this will be overridden.
- * @param view The view that will hold the popover.
- * @param frame The originating frame. The popover's arrow will point to the center of this frame.
+ * @param anchorView The originating view. The popover's arrow will point to the center of this view.
  * @param interval The time interval that determines when the poptip will self-dismiss
  */
-- (void)showAttributedText:(nonnull NSAttributedString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth inView:(nonnull UIView *)view fromFrame:(CGRect)frame duration:(NSTimeInterval)interval;
+- (void)showAttributedText:(nonnull NSAttributedString *)text direction:(AMPopTipDirection)direction maxWidth:(CGFloat)maxWidth anchorView:(nonnull UIView *)view duration:(NSTimeInterval)interval;
 
 /** Show the popover with a custom view
  *
@@ -166,11 +161,10 @@ typedef NS_ENUM(NSInteger, AMPopTipActionAnimation) {
  *
  * @param customView The custom view
  * @param direction The direction of the popover.
- * @param view The view that will hold the popover.
- * @param frame The originating frame. The popover's arrow will point to the center of this frame.
+ * @param anchorView The originating view. The popover's arrow will point to the center of this view.
  * @param interval The time interval that determines when the poptip will self-dismiss
  */
-- (void)showCustomView:(nonnull UIView *)customView direction:(AMPopTipDirection)direction inView:(nonnull UIView *)view fromFrame:(CGRect)frame duration:(NSTimeInterval)interval;
+- (void)showCustomView:(nonnull UIView *)customView direction:(AMPopTipDirection)direction anchorView:(nonnull UIView *)view duration:(NSTimeInterval)interval;
 
 /** Hide the popover
  *
