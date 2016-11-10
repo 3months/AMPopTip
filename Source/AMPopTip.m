@@ -100,6 +100,15 @@
 }
 
 - (void)setup {
+    
+    if (self.direction == AMPopTipVerticalAuto) {
+        if(self.fromFrame.origin.y + self.fromFrame.size.height > [[UIScreen mainScreen] bounds].size.height / 2.0) {
+            self.direction = AMPopTipDirectionUp;
+        } else {
+            self.direction = AMPopTipDirectionDown;
+        }
+    }
+    
     if (self.direction == AMPopTipDirectionLeft) {
         self.maxWidth = MIN(self.maxWidth, self.fromFrame.origin.x - self.padding * 2 - self.edgeInsets.left - self.edgeInsets.right - self.arrowSize.width);
     }
