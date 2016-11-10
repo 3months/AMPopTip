@@ -517,6 +517,12 @@
 - (CGRect) getFrameRelativeToSuperMostView:(UIView *)view {
     CGRect frame = view.frame;
     
+    //Need to check if any of the parent views are scrollviews
+    //If so we will take their content offset away from our y value
+    if ([view isKindOfClass:[UIScrollView class]]) {
+        frame.origin.y -= ((UIScrollView *)view).contentOffset.y;
+    }
+    
     if(view.superview != nil) {
         CGRect superviewsFrame = [self getFrameRelativeToSuperMostView:view.superview];
         frame.origin.x += superviewsFrame.origin.x;
