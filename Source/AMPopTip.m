@@ -100,6 +100,18 @@
 }
 
 - (void)setup {
+    
+    if (self.direction == AMPopTipVerticalAuto) {
+        CGFloat popTipTop = self.fromFrame.origin.y + self.fromFrame.size.height;
+        if(popTipTop < [[UIScreen mainScreen] bounds].size.height / 2.0) {
+            //Top half of the screen
+            self.direction = AMPopTipDirectionDown;
+        } else {
+            //Bottom half of the screen
+            self.direction = AMPopTipDirectionUp;
+        }
+    }
+    
     if (self.direction == AMPopTipDirectionLeft) {
         self.maxWidth = MIN(self.maxWidth, self.fromFrame.origin.x - self.padding * 2 - self.edgeInsets.left - self.edgeInsets.right - self.arrowSize.width);
     }
