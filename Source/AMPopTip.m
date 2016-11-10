@@ -102,10 +102,13 @@
 - (void)setup {
     
     if (self.direction == AMPopTipVerticalAuto) {
-        if(self.fromFrame.origin.y + self.fromFrame.size.height > [[UIScreen mainScreen] bounds].size.height / 2.0) {
-            self.direction = AMPopTipDirectionUp;
-        } else {
+        CGFloat popTipTop = self.fromFrame.origin.y + self.fromFrame.size.height;
+        if(popTipTop < [[UIScreen mainScreen] bounds].size.height / 2.0) {
+            //Top half of the screen
             self.direction = AMPopTipDirectionDown;
+        } else {
+            //Bottom half of the screen
+            self.direction = AMPopTipDirectionUp;
         }
     }
     
