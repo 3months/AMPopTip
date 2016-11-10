@@ -101,7 +101,7 @@
 
 - (void)setup {
     
-    if (self.direction == AMPopTipVerticalAuto) {
+    if (self.direction == AMPopTipDirectionVerticalAuto) {
         CGFloat popTipTop = self.fromFrame.origin.y + self.fromFrame.size.height;
         if(popTipTop < [[UIScreen mainScreen] bounds].size.height / 2.0) {
             //Top half of the screen

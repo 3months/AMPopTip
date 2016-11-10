@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, AMPopTipDirection) {
     AMPopTipDirectionNone,
     /** Shows the poptip in either the up or down position, 
      depending on where the anchor view is located in the view*/
-    AMPopTipVerticalAuto
+    AMPopTipDirectionVerticalAuto
 };
 
 /** @enum AMPopTipEntranceAnimation
